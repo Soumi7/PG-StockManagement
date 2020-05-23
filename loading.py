@@ -1,10 +1,16 @@
 import pickle
 from datetime import datetime , timedelta
 import pandas as pd
+import pycaret
 
-loaded_model=pickle.load(open("Final_Mod.pkl","rb"))
+# loaded_model=pickle.load(open("Final_Mod.pkl","rb"))
 
-date=(input("enter the month and year for which you want to predict the sales of the product : "))
+# with open("Final_Mod.pkl", 'rb') as file:  
+#     Model = pickle.load(file)
+
+
+
+date=(input("enter the month and year for which you want to predict the sales of the product [EXAMPLE : 02-2020 (FEB 2020)]: "))
 
 #this will be used when we have multiple models to predict on
 # category=input("enter the product catergory you want to have")
@@ -131,20 +137,20 @@ print(monthly_averages)
 
 
 #this is the manual way of standard scaling( also called z-score) where z= (x-u)/s where u is the mean and s is the standard deviation =
-monthly_averages[0]=(monthly_averages[0]-9.938361618798812)/8.179640810862661
-monthly_averages[1]=(monthly_averages[1]-7.918146214098957)/9.922044758131065
-monthly_averages[2]=(monthly_averages[2]-1.3829416884247172)/0.608677389627343
-monthly_averages[3]=(monthly_averages[3]-1.2075718015665797)/0.822514130746482
-monthly_averages[4]=(monthly_averages[4]-75.15467362924234)/5.489277393805853
+# monthly_averages[0]=(monthly_averages[0]-9.938361618798812)/8.179640810862661
+# monthly_averages[1]=(monthly_averages[1]-7.918146214098957)/9.922044758131065
+# monthly_averages[2]=(monthly_averages[2]-1.3829416884247172)/0.608677389627343
+# monthly_averages[3]=(monthly_averages[3]-1.2075718015665797)/0.822514130746482
+# monthly_averages[4]=(monthly_averages[4]-75.15467362924234)/5.489277393805853
 
-monthly_averages=np.around(monthly_averages,2)
+# monthly_averages=np.around(monthly_averages,2)
 
-monthly_averages=list(monthly_averages)
+# monthly_averages=list(monthly_averages)
 
-monthly_averages.insert(0,-0.381941)
-monthly_averages.insert(0,2.524183)
+# monthly_averages.insert(0,-0.381941)
+# monthly_averages.insert(0,2.524183)
 
-monthly_averages=np.around(monthly_averages,2)
+# monthly_averages=np.around(monthly_averages,2)
 
 print(monthly_averages)
 # monthly_averages=list(monthly_averages)
@@ -154,8 +160,15 @@ print(monthly_averages)
 ### I HAVE SAVED THE PICKLE AS WELL AS THE OTHER NOTEBOOK IN THE REPO PLEASE CHECK IT.
 ### ALSO CHECK IF PYCARET SAVES THE MODEL AS A PROPER PICKLE FILE.  IDK WHT I AINT ABLE TO PREDCIT 
 
+from pycaret.regression import*
 
 
-pred=loaded_model.predict([[ 2.52 ,-0.38 , 1.18 , 1.06,  1.01, -0.25 ,-0.34]])
-print(pred)
+loaded_model=load_model("Final_Mod")
+# pred=Model.predict([[ 2.52 ,-0.38 , 1.18 , 1.06,  1.01, -0.25 ,-0.34]])
+
+unseen_data=pd.read_csv("GROUP_OF_DATASETS/SWEETS.csv")
+
+pred=predict_model(loaded_model, data= unseen_data.head(5))
+
 # print(monthly_weather_data["avg_temp"])
+print(pred["name"] pred["Label"])

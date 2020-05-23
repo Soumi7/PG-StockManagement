@@ -1,7 +1,14 @@
 import pickle
 from datetime import datetime , timedelta
 import pandas as pd
+import numpy as np
 
-loaded_model=pickle.load(open("Final_Mod.pkl","rb"))
+df=pd.read_csv("GROUP_OF_DATASETS/VEGETABLES.csv")
 
-print(type(loaded_model))
+import matplotlib.pyplot as plt
+
+plt.hist(np.log(df["quantity"]))
+
+plt.show()
+
+# print(df["quantity"].mean())
