@@ -7,7 +7,7 @@ import requests
 from wwo_hist import retrieve_hist_data
 
 date=(input("enter the month and year for which you want to predict the sales of the product [EXAMPLE : 02-2020 (FEB 2020)]: "))
-print("The Products are : \n  ALCOHOL ,  BREAD  , CHEMISTRY , CHEWING_GUM_LOLIPOPS  \n   CHIPS_FLAKES  ,  CIGARETTES  ,  COFFEE TEA  ,  COOKIES_BULK \n DAIRY_CHESSE  ,  DRINK_JUICE  ,  GENERAL  ,  GENERAL_FOOD \n GENERAL_ITEMS  ,  GROATS_RICE_PASTA  ,  ICE_CREAMS_FROZEN,  KETCH_CONCETRATE_MUSTARD_MAJO_HORSERADISH \n OCCASIONAL  ,  POULTRY  ,  SPICES  ,  SWEETS  ,  TABLETS  ,  VEGETABLES")
+print("The Products are : \n  ALCOHOL ,  BREAD  , CHEMISTRY , CHEWING_GUM_LOLIPOPS  \n   CHIPS_FLAKES  ,  CIGARETTES  ,  COFFEE TEA  \n DAIRY_CHESSE  ,  DRINK_JUICE  ,  GENERAL  ,  GENERAL_FOOD \n GENERAL_ITEMS  ,  GROATS_RICE_PASTA  ,  ICE_CREAMS_FROZEN,  KETCH_CONCETRATE_MUSTARD_MAJO_HORSERADISH \n OCCASIONAL  ,  POULTRY  ,  SPICES  ,  SWEETS  ,  TABLETS  ,  VEGETABLES")
 group=input("Enter the group of products for which you want to predict the sales for the above entered month : ")
 
 
@@ -123,25 +123,50 @@ monthly_weather_data=final_weather(monthly_weather_data)
 
 final_data=pd.read_csv("GROUP_OF_ITEMS_FINAL/"+group.upper()+".csv")
 
+final_data=final_data.drop(["Unnamed: 0"],axis=1)
+
+# print(final_data.head())
 
 
-# final_data["ishol/week"]=9
-# final_data["monthly_Avgtemp"]=monthly_weather_data[0]
-# final_data["monthly_avg_FeelsLikeC"]=monthly_weather_data[1]
-# final_data["monthly_avg_HeatIndexC"]=monthly_weather_data[2]
-# final_data["monthly_avg_cloudcover"]=monthly_weather_data[3]
-# final_data["monthly_avg_humidity"]=monthly_weather_data[4]
+final_data["ishol/week"]=9
+final_data["group"]=group
+final_data["monthly_Avgtemp"]=monthly_weather_data[0]
+final_data["monthly_avg_FeelsLikeC"]=monthly_weather_data[1]
+final_data["monthly_avg_HeatIndexC"]=monthly_weather_data[2]
+final_data["monthly_avg_cloudcover"]=monthly_weather_data[3]
+final_data["monthly_avg_humidity"]=monthly_weather_data[4]
 
-# # # test_data=pd.read_csv("GROUP_OF_DATASETS/SWEETS.csv")
+# # # test_data="pd.read_csv("GROUP_OF_DATASETS/SWEETS.csv")
 # # test_data=test_data.rename(columns={0:"weekend"})
 # # test_data=test_data.drop(test_data["quantity"])
 
-# # print(final_data.head())
+# print(final_data.head())
 
-# loaded_model=load_model("Final_Mod")
+if group=="ALCOHOL" or "KETCH_CONCETRATE_MUSTARD_MAJO_HORSERADISH" or "SPICES" or "GENERAL" or "BREAD" or "CHEWING_GUM_LOLIPOPS" or "GENERAL_FOOD":
+    loaded_model=load_model("MODELS/gb")
+    
+elif group== "COFFEE TEA" or "CIGARETTES" or "CHIPS_FLAKES" or "ICE_CREAMS_FROZEN" or "POULTRY" or "SWEETS":
+    loaded_model=load_model("MODELS/extreme_gb")
 
-# pred=predict_model(loaded_model, data= final_data)
+elif group== "GROATS_RICE_PASTA" or "OCCASIONAL":
+    loaded_model=load_model("MODELS/adab")
+
+elif group== "CHEMISTRY" or "GENERAL_ITEMS" or "VEGETABLES":
+    loaded_model=load_model("MODELS/rf")
+
+elif group== "DAIRY_CHESSE":
+    loaded_model=load_model("MODELS/catb")
+
+pred=predict_model(loaded_model, data= final_data)
 
 # print(pred.head())
+final_sales=(np.exp(pred["Label"]))
+final_sales=np.round(final_sales,0)
 
+fmt = '{:<8}{:<80}{}'
 
+# print(pred["name",], final_sales)
+
+print(fmt.format('', 'NAME', 'QUANTITY'))
+for i, (name, sales) in enumerate(zip(pred["name"], final_sales )):
+    print(fmt.format(i, name, sales))
