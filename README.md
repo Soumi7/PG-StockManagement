@@ -51,7 +51,7 @@ This project aims at enabling **real-time and even predictive out of stock in re
 - We have used various time series and regression techniques like Exponential smoothing model and SVR ( Support Vector Regression) and Holt-Trend Method,
 Holt-Winters Seasonal Models will be used. 
 
-- Logistic regression , Lasso Regression and ElasticNet Regression models will be used. A multilayer feedforward artificial neural network (MLFANN) is employed as a deep learning algorithm to train the data as well.
+- Gradient Boosting, Extreme Gradient Boosting, Cat Boost Classifier, Ada Boost algorithms have been used  to train the data as well.
 
 - The output from each model is then integrated together using decision integration. This approach is being used by the way of combining the strengths of different algorithms into a single collaborated method philosophy. 
 
@@ -61,6 +61,10 @@ Holt-Winters Seasonal Models will be used.
 ## FINAL RESULT:
 
 The final result is a **number of units sold for each product of each category** so as to know and procure the required goods. 
+
+## Accuracy:
+
+The accuracy we have got is 62% by using the trained models.
 
 
 ## Dataset
