@@ -164,21 +164,21 @@ final_sales=(np.exp(pred["Label"]))
 final_sales=np.round(final_sales,0)
 
 pred["Label"]=final_sales
-
+'''
 output=pred
 
 s=""
-
 
 for row in output:
         s+='Quantity of product {} predicted is  {}\n'.format(row['name'],row['Label'])
 
 
 print(s)
-# fmt = '{:<8}{:<80}{}'
+'''
+fmt = '{:<8}{:<80}{}'
 
-# print(pred["name",], final_sales)
+print(pred["name",], final_sales)
 
-# print(fmt.format('', 'NAME', 'QUANTITY'))
-# for i, (name, sales) in enumerate(zip(pred["name"], final_sales )):
-#     print(fmt.format(i, name, sales))
+print(fmt.format('', 'NAME', 'QUANTITY'))
+for i, (name, sales) in enumerate(zip(pred["name"], final_sales )):
+    print(fmt.format(i, name, sales))
