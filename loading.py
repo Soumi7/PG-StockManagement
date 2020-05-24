@@ -1,24 +1,19 @@
-import pickle
 from datetime import datetime , timedelta
 import pandas as pd
-import pycaret
-
-# loaded_model=pickle.load(open("Final_Mod.pkl","rb"))
-
-# with open("Final_Mod.pkl", 'rb') as file:  
-#     Model = pickle.load(file)
-
-
+import numpy as np
+import matplotlib.pyplot as plt
+from pycaret.regression import *
+import requests
+from wwo_hist import retrieve_hist_data
 
 date=(input("enter the month and year for which you want to predict the sales of the product [EXAMPLE : 02-2020 (FEB 2020)]: "))
-
-#this will be used when we have multiple models to predict on
-# category=input("enter the product catergory you want to have")
-
+print("The Products are : \n  ALCOHOL ,  BREAD  , CHEMISTRY , CHEWING_GUM_LOLIPOPS  \n   CHIPS_FLAKES  ,  CIGARETTES  ,  COFFEE TEA  ,  COOKIES_BULK \n DAIRY_CHESSE  ,  DRINK_JUICE  ,  GENERAL  ,  GENERAL_FOOD \n GENERAL_ITEMS  ,  GROATS_RICE_PASTA  ,  ICE_CREAMS_FROZEN,  KETCH_CONCETRATE_MUSTARD_MAJO_HORSERADISH \n OCCASIONAL  ,  POULTRY  ,  SPICES  ,  SWEETS  ,  TABLETS  ,  VEGETABLES")
+group=input("Enter the group of products for which you want to predict the sales for the above entered month : ")
 
 
 converted_datetime=pd.to_datetime(date).date()
 
+# this function makes sure that when the user enters a date, it calculates the ending of the month the user entered  
 def dateaddition (converted_datetime):
     if int(str(converted_datetime).split("-")[0])%4 ==0:
         if (int(str(converted_datetime).split("-")[1])) ==2:
@@ -46,18 +41,20 @@ def dateaddition (converted_datetime):
     return added_days
 
 
-end_date= pd.to_datetime(converted_datetime+timedelta(dateaddition(converted_datetime)-1)).date().strftime("%d-%b-%Y")
-
-#converting the file to the required format so as to enter it in the wwo-hist
+#converting the dates to strings to pass them through the weather-collecting api
 start_date = converted_datetime.strftime("%d-%b-%Y")
 
-print(start_date,"   ",end_date)
+# calculating the end date based on the function dateaddition
+end_date= pd.to_datetime(converted_datetime+timedelta(dateaddition(converted_datetime)-1)).date()
+
+#if the user enters the present month, the end date will be calculated based on the present day 
+if end_date > datetime.now().date():
+    end_date= datetime.now().date().strftime("%d-%b-%Y")
+else:
+    end_date=end_date.strftime("%d-%b-%Y")
 
 
-
-
-import requests
-from wwo_hist import retrieve_hist_data
+# this is an api to collect the necessary weather data we need 
 frequency = 24
 start_date = start_date
 end_date = end_date
@@ -72,37 +69,39 @@ hist_weather_data = retrieve_hist_data(api_key,
                                         export_csv = True,
                                         store_df = True)
 
-import numpy as np
-monthly_weather_data=pd.read_csv("Month_Weather_data.csv")
-
-monthly_weather_data=monthly_weather_data.drop(["date_time","totalSnow_cm","sunHour","uvIndex.1","uvIndex","moon_illumination","moonrise","moonset","sunrise","DewPointC","sunset","WindChillC","WindGustKmph","precipMM","pressure","visibility","winddirDegree","windspeedKmph","tempC"],axis=1)
+   #the weather data is stored in the file "Mlawa.csv", hence we read from that 
+monthly_weather_data=pd.read_csv("Mlawa.csv")
 
 
-monthly_weather_data["avg_temp"]=(monthly_weather_data["maxtempC"]+monthly_weather_data["mintempC"])/2
+def final_weather(monthly_weather_data):
+    #dropping the unecessary columns
+    monthly_weather_data=monthly_weather_data.drop(["date_time","totalSnow_cm","sunHour","uvIndex.1","uvIndex","moon_illumination","moonrise","moonset","sunrise","DewPointC","sunset","WindChillC","WindGustKmph","precipMM","pressure","visibility","winddirDegree","windspeedKmph","tempC"],axis=1)
+    monthly_weather_data["avg_temp"]=(monthly_weather_data["maxtempC"]+monthly_weather_data["mintempC"])/2
+    monthly_weather_data=monthly_weather_data.drop(["maxtempC","mintempC"],axis=1)
+    # rearranging the data
+    monthly_weather_data=monthly_weather_data[["avg_temp","FeelsLikeC","HeatIndexC","cloudcover","humidity",]]
+    values=[]
+    monthly_averages=[]
 
-monthly_weather_data=monthly_weather_data.drop(["maxtempC","mintempC"],axis=1)
+    def mean_data(data):
+        
+        for key,value in data.iteritems():
+            values.append(value.mean())
+            print(key)
+        return values
 
-monthly_weather_data=monthly_weather_data[["avg_temp","FeelsLikeC","HeatIndexC","cloudcover","humidity",]]
-# monthly_weather_data=monthly_weather_data[["avg_temp","FeelsLikeC","HeatIndexC","cloudcover","humidity","ishol/week"]]
-
-# print(monthly_weather_data.head())
-
-def cat_heat(heatindex):
-    # monthly_heatindex=[]
-    # for heatindex in data["HeatIndexC"]:
+    #categorising the heat_index data into three different types
+    def cat_heat(heatindex):
         if heatindex < -2:
             return (0)
         elif heatindex >=-1 and heatindex<=14:
             return (1)
         else:
-            return (2)
-        
+            return (2)   
 
 
-
-def cat_cloud(cloudcover):
-    # monthly_cloudcover=[]
-    # for cloudcover in data["cloudcover"]:
+    #categorising the cloud cover into 4 different types
+    def cat_cloud(cloudcover):
         if cloudcover < 25:
             return(0)
         elif cloudcover >=25 and cloudcover<50:
@@ -111,64 +110,36 @@ def cat_cloud(cloudcover):
             return(1)    
         else:
             return(3)
+
+    monthly_averages=np.around(mean_data(monthly_weather_data),2)
+    monthly_averages[2]=cat_heat(monthly_averages[2])
+    monthly_averages[3]=cat_cloud(monthly_averages[3])
+
+    return monthly_averages
+
+monthly_weather_data=final_weather(monthly_weather_data)
         
-            
+# print(monthly_weather_data)
 
-            
+# final_data=pd.read_csv("GROUP_OF_ITEMS/"+group.upper()+".csv")
 
-def mean_data(data):
-    values=[]
-    for key,value in data.iteritems():
-        values.append(value.mean())
-        print(key)
-    return values
+# final_data["ishol/week"]=9
+# final_data["monthly_avg_temp"]=monthly_weather_data[0]
+# final_data["monthly_FeelsLikeC"]=monthly_weather_data[1]
+# final_data["monthly_HeatIndexC"]=monthly_weather_data[2]
+# final_data["monthly_cloudcover"]=monthly_weather_data[3]
+# final_data["monthly_humidity"]=monthly_weather_data[4]
 
-monthly_averages=np.around(mean_data(monthly_weather_data),2)
-monthly_averages[2]=cat_heat(monthly_averages[2])
-monthly_averages[3]=cat_cloud(monthly_averages[3])
-        
-print(monthly_averages)
+test_data=pd.read_csv("GROUP_OF_DATASETS/SWEETS.csv")
+test_data=test_data.rename(columns={0:"weekend"})
+test_data=test_data.drop(test_data["quantity"])
 
-
-#the following code isn't working out because the scaled info should come from the training data and not here why I'm going to do it manually
-# from sklearn.preprocessing import StandardScaler
-# scaler = StandardScaler()
-# print(scaler.fit_transform(monthly_averages.reshape(1,-1)))
-
-
-#this is the manual way of standard scaling( also called z-score) where z= (x-u)/s where u is the mean and s is the standard deviation =
-# monthly_averages[0]=(monthly_averages[0]-9.938361618798812)/8.179640810862661
-# monthly_averages[1]=(monthly_averages[1]-7.918146214098957)/9.922044758131065
-# monthly_averages[2]=(monthly_averages[2]-1.3829416884247172)/0.608677389627343
-# monthly_averages[3]=(monthly_averages[3]-1.2075718015665797)/0.822514130746482
-# monthly_averages[4]=(monthly_averages[4]-75.15467362924234)/5.489277393805853
-
-# monthly_averages=np.around(monthly_averages,2)
-
-# monthly_averages=list(monthly_averages)
-
-# monthly_averages.insert(0,-0.381941)
-# monthly_averages.insert(0,2.524183)
-
-# monthly_averages=np.around(monthly_averages,2)
-
-print(monthly_averages)
-# monthly_averages=list(monthly_averages)
-
-
-### BRO PLEASE CHECK THIS OUT. IT IS NOT ACCEPTING A NUMPY ARRAY PLEASE TRY TO DO WHAT YOU CAN. ABHI I AM VERY SLEEPY AND MY BRAIN IS FRIED 
-### I HAVE SAVED THE PICKLE AS WELL AS THE OTHER NOTEBOOK IN THE REPO PLEASE CHECK IT.
-### ALSO CHECK IF PYCARET SAVES THE MODEL AS A PROPER PICKLE FILE.  IDK WHT I AINT ABLE TO PREDCIT 
-
-from pycaret.regression import*
-
+# print(final_data.head())
 
 loaded_model=load_model("Final_Mod")
-# pred=Model.predict([[ 2.52 ,-0.38 , 1.18 , 1.06,  1.01, -0.25 ,-0.34]])
 
-unseen_data=pd.read_csv("GROUP_OF_DATASETS/SWEETS.csv")
+pred=predict_model(loaded_model, data= test_data)
 
-pred=predict_model(loaded_model, data= unseen_data.head(5))
+print(pred.head())
 
-# print(monthly_weather_data["avg_temp"])
-print(pred["name"] pred["Label"])
+
