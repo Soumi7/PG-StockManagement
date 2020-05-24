@@ -208,7 +208,9 @@ Click here to view DEMO VIDEO : https://youtu.be/Yu01uDnsUFY
 
 - The web application outputs the names and predicted quantites for every product in that group.
 
-#### Click Here to test it live! : pgstockprediction.herokuapp.com
+#### Click Here to test it live! : 
+
+https://pgstockprediction.herokuapp.com
 
 
 https://docs.google.com/presentation/d/1E6kn-N0C6Wd8OOtVYtF-8lNsVlb-jBVzabOo2EBCt64/edit?usp=sharing
