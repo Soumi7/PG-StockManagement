@@ -4,6 +4,8 @@
 
 # Predictive Analysis of Stock
 
+This project aims at enabling **real-time and even predictive out of stock in retail stores in a cost-effective manner**
+
 ### Theme: Artificial Intelligence and Machine Learning
 
 ## STOCK MANAGEMENT
