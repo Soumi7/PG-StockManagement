@@ -2,25 +2,25 @@
 
 P&G is one of the largest and amongst the fastest-growing consumer goods companies globally.
 
-Predictive Analysis of Stock
+# Predictive Analysis of Stock
 
-Theme: Artificial Intelligence and Machine Learning
+### Theme: Artificial Intelligence and Machine Learning
 
-STOCK MANAGEMENT
+## STOCK MANAGEMENT
 
 Since competition is increasing day by day among retailers at the market, companies are focusing more predictive analytics techniques in order to decrease their costs and increase their productivity and profit. Excessive stocks (overstock) and out- of-stock (stockouts) are very serious problems for retailers.
 
 Excessive stock levels can cause revenue loss because of company capital bound to stock surplus. Excess inventory can also lead to increased storage, labor, and insurance costs, and quality reduction and degradation depending on the type of the product.
 
 
-The Problem 
+## The Problem 
 
 Excessive stock levels can cause revenue loss because of company capital bound to stock surplus. 
 Excess inventory can also lead to increased storage, labor, and insurance costs, and quality reduction and degradation depending on the type of the product. 
 Out-of-stock products can result in loss for sales and reduced customer satisfaction and store loyalty.
 
 
-Our Solution
+## Solution
 
 Sales and customer loss is a critical problem for retailers. Considering competition and financial constraints in the retail industry, it is very crucial to have an accurate demand forecasting and inventory control system for management of effective operations. 
 
@@ -29,7 +29,7 @@ Here comes predictive analytics where the out-of-stock predictions are more accu
 Predictive analytics is the utilization of information, factual calculations and machine learning methods to distinguish the probability of future results in light of chronicled information.
 
 
-Weather Predictive Stock Fulfilment
+## Weather Predictive Stock Fulfilment
 
 Weather plays a crucial role in the accurate predictiveness of the stock.
 
@@ -40,7 +40,7 @@ Results of studies show that weather has significant effect on store traffic and
 If companies are informed about the changes in weather ahead of time, it adds predictability in sales with the application of relevant trade promotions. After all, small changes to retail sales would increase revenues by a large percentage.
 
 
-Idea and Implementation:
+## Idea and Implementation:
 
 If companies are informed about the changes in weather ahead of time, it adds predictability in sales with the application of relevant trade promotions. After all, small changes to retail sales would increase revenues by a large percentage.
 
@@ -57,12 +57,12 @@ The output from each model is then integrated together using decision integratio
 An ensemble system will be used  to give better accuracy. We use an integration technique so as to predict the best model out of all. ie. We shall use boosting as it predicts the best algorithm as the weights of each model( which get assigned to each model) are changed depending on the output of the previously acquired knowledge. 
 
 
-FINAL RESULT:
+## FINAL RESULT:
 
 The final result is a number of units sold for each product of each category so as to know and procure the required goods. 
 
 
-Dataset
+## Dataset
 
 The Dataset we have is data of sale of various FMCG goods of a SuperMarket located in a city in Poland with a population of 30000 people. The store is located in the prime locality of the city and offer various products like general food-and basic chemistry, hygienic articles, fresh bread,sweets, local vegetables, dairy, basic meat(ham,sausages), newspaper, home chemistry etc. 
 
@@ -73,20 +73,20 @@ The Data deals with products sold  in a time period of 12 days over various weat
 We predict the number of products sold for each category everyday based on this data. The inputs taken by the model would be the weather and the probable quantity sold each day would be the final output. This would lead to better predicting of stock and easy ordering of the necessary goods. 
 
 
-Flowchart
+## Flowchart
 
 A brief flowchart showing each step in the model building process.
 
 
 
-Training, Testing and Deployment
+## Training, Testing and Deployment
 
 
 The final decision of the system is based on the best algorithms of  the day by gaining more weight. This makes our forecasts more reliable with respect to the trend changes and seasonality behavior.
 
 
 
-TECHNOLOGIES USED 
+## TECHNOLOGIES USED 
 
 To implement the regression models and select the best performing one, we have used pycaret library in python
 
@@ -98,9 +98,9 @@ Finally the web application was deployed on the server using Heroku CLI.
 
 
 
-WORKFLOW
+## WORKFLOW
 
-Data Analysis
+### Data Analysis
 
 
 First we analyse the data to understand its structure
@@ -114,7 +114,7 @@ We add a column separately to check whether that day is a weekday or holiday. Th
 We change the categorical values to numeric. 
 
 
-Weather Data API
+### Weather Data API
 
 
 We use the wwo-hist historical weather data retrieval  API.
@@ -126,7 +126,7 @@ The api returns a csv of date and their respective weather conditions like tempe
 We merge the obtained csv date wise to our dataset and again visualise the data to analyse the corelations between weather data and sales.
 
 
-PYCARET TO TRAIN SEVERAL REGRESSION MODELS
+### PYCARET TO TRAIN SEVERAL REGRESSION MODELS
 
 
 We train several regression models. 
@@ -134,7 +134,7 @@ We train several regression models.
 They include svm...
 
 
-REAL WORLD SCENARIO
+## REAL WORLD SCENARIO
 
 Working of Prototype in Real World Scenario
 
@@ -145,7 +145,7 @@ We can train the models on Data from inventories oF P&G over a certain time peri
 The model will give better results when we have a lot more focused data.
 
 
-Benefits
+## Benefits
 
 It’s better to utilize real-time information to move stock where it's required before it's past the point of no return. 
 
@@ -156,13 +156,13 @@ Retail has moved toward becoming as much about envisioning clients' needs as it 
 Real-time and predictive out of stock in retail stores in a cost-effective manner.
 
 
-DEMO VIDEO
+## DEMO VIDEO
 
 Click here to view DEMO VIDEO
 
 
 
-TEST IT LIVE!
+## TEST IT LIVE!
 
 Our web app is live on heroku.
 
