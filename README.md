@@ -106,7 +106,7 @@ The final decision of the system is based on the best algorithms of  the day by 
 
 - First we analyse the data to understand its structure
 
-- The dataset has several columns. We check the corelations of these coumns with quantity and remove the unrequired ones.
+- The dataset has several columns. We check the correlations of these coumns with quantity and remove the unrequired ones.
  
 - We further scale the data to remove its skewness.
 
