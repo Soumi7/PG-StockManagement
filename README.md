@@ -195,3 +195,5 @@ Click here to view DEMO VIDEO : https://youtu.be/oqBa5oczFZo
 #### Click Here to test it live! : pgstockprediction.herokuapp.com
 
 
+https://docs.google.com/presentation/d/1E6kn-N0C6Wd8OOtVYtF-8lNsVlb-jBVzabOo2EBCt64/edit?usp=sharing
+
