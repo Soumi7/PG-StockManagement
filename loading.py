@@ -121,25 +121,27 @@ monthly_weather_data=final_weather(monthly_weather_data)
         
 # print(monthly_weather_data)
 
-# final_data=pd.read_csv("GROUP_OF_ITEMS/"+group.upper()+".csv")
+final_data=pd.read_csv("GROUP_OF_ITEMS_FINAL/"+group.upper()+".csv")
+
+
 
 # final_data["ishol/week"]=9
-# final_data["monthly_avg_temp"]=monthly_weather_data[0]
-# final_data["monthly_FeelsLikeC"]=monthly_weather_data[1]
-# final_data["monthly_HeatIndexC"]=monthly_weather_data[2]
-# final_data["monthly_cloudcover"]=monthly_weather_data[3]
-# final_data["monthly_humidity"]=monthly_weather_data[4]
+# final_data["monthly_Avgtemp"]=monthly_weather_data[0]
+# final_data["monthly_avg_FeelsLikeC"]=monthly_weather_data[1]
+# final_data["monthly_avg_HeatIndexC"]=monthly_weather_data[2]
+# final_data["monthly_avg_cloudcover"]=monthly_weather_data[3]
+# final_data["monthly_avg_humidity"]=monthly_weather_data[4]
 
-test_data=pd.read_csv("GROUP_OF_DATASETS/SWEETS.csv")
-test_data=test_data.rename(columns={0:"weekend"})
-test_data=test_data.drop(test_data["quantity"])
+# # # test_data=pd.read_csv("GROUP_OF_DATASETS/SWEETS.csv")
+# # test_data=test_data.rename(columns={0:"weekend"})
+# # test_data=test_data.drop(test_data["quantity"])
 
-# print(final_data.head())
+# # print(final_data.head())
 
-loaded_model=load_model("Final_Mod")
+# loaded_model=load_model("Final_Mod")
 
-pred=predict_model(loaded_model, data= test_data)
+# pred=predict_model(loaded_model, data= final_data)
 
-print(pred.head())
+# print(pred.head())
 
 
