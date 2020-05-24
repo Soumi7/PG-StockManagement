@@ -1,6 +1,6 @@
 # PG-StockManagement
 
-P&G is one of the largest and amongst the fastest-growing consumer goods companies globally.
+**P&G** is one of the largest and amongst the fastest-growing consumer goods companies globally.
 
 # Predictive Analysis of Stock
 
@@ -8,7 +8,7 @@ P&G is one of the largest and amongst the fastest-growing consumer goods compani
 
 ## STOCK MANAGEMENT
 
-- Since competition is increasing day by day among retailers at the market, companies are focusing more predictive analytics techniques in order to decrease their costs and increase their productivity and profit. 
+- Since **competition** is increasing day by day among retailers at the market, **companies are focusing more predictive analytics techniques** in order to **decrease their costs** and **increase their productivity and profit**. 
 
 - Excessive stocks (overstock) and out- of-stock (stockouts) are very serious problems for retailers.
 
@@ -17,25 +17,25 @@ P&G is one of the largest and amongst the fastest-growing consumer goods compani
 
 ## The Problem 
 
-- Excessive stock levels can cause revenue loss because of company capital bound to stock surplus. 
-- Excess inventory can also lead to increased storage, labor, and insurance costs, and quality reduction and degradation depending on the type of the product. 
-- Out-of-stock products can result in loss for sales and reduced customer satisfaction and store loyalty.
+- Excessive stock levels can cause **revenue loss** because of company capital bound to stock surplus. 
+- Excess inventory can also lead to **increased storage, labor, and insurance costs, and quality reduction and degradation** depending on the type of the product. 
+- Out-of-stock products can result in **loss for sales** and **reduced customer satisfaction and store loyalty**.
 
 
 ## Solution
 
-- Sales and customer loss is a critical problem for retailers. Considering competition and financial constraints in the retail industry, it is very crucial to have an accurate demand forecasting and inventory control system for management of effective operations. 
+- Sales and customer loss is a critical problem for retailers. Considering competition and financial constraints in the retail industry, it is very crucial to have an **accurate demand forecasting and inventory control system for management of effective operations**. 
 
-- Here comes predictive analytics where the out-of-stock predictions are more accurate.
+- Here comes **predictive analytics** where the **out-of-stock predictions are more accurate**.
 
 - Predictive analytics is the utilization of information, factual calculations and machine learning methods to distinguish the probability of future results in light of chronicled information.
 
 
 ## Weather Predictive Stock Fulfilment
 
-- Weather plays a crucial role in the accurate predictiveness of the stock.
+- **Weather** plays a **crucial** role in the **accurate predictiveness of the stock**.
 
-- Weather influences the consumer psychology, habits, product preference, and behavior. It affects four basic purchasing decisions: what, where, when and in what quantity to buy. 
+- Weather influences the **consumer psychology, habits, product preference, and behavior**. It affects four basic purchasing decisions: **what, where, when and in what quantity** to buy. 
 
 - Results of studies show that weather has significant effect on store traffic and sales of many product categories and store types. 
 
@@ -43,9 +43,6 @@ P&G is one of the largest and amongst the fastest-growing consumer goods compani
 
 
 ## Idea and Implementation:
-
-- If companies are informed about the changes in weather ahead of time, it adds predictability in sales with the application of relevant trade promotions. After all, small changes to retail sales would increase revenues by a large percentage.
-
 
 - With the help of weather predictive stock fulfillment, stocking and early purchase would be more meaningful. Combining historical data with past and predicted weather patterns we  can project the levels of demand and correct levels of supply. This adds more efficiency and accuracy to the planning process and eliminates gut-based planning.
 
@@ -61,12 +58,12 @@ Holt-Winters Seasonal Models will be used.
 
 ## FINAL RESULT:
 
-The final result is a number of units sold for each product of each category so as to know and procure the required goods. 
+The final result is a **number of units sold for each product of each category** so as to know and procure the required goods. 
 
 
 ## Dataset
 
-The Dataset we have is data of sale of various FMCG goods of a SuperMarket located in a city in Poland with a population of 30000 people. The store is located in the prime locality of the city and offer various products like general food-and basic chemistry, hygienic articles, fresh bread,sweets, local vegetables, dairy, basic meat(ham,sausages), newspaper, home chemistry etc. 
+The Dataset we have is **data of sale of various FMCG goods of a SuperMarket** located in a city in Poland with a population of 30000 people. The store is located in the prime locality of the city and offer various products like general food-and basic chemistry, hygienic articles, fresh bread,sweets, local vegetables, dairy, basic meat(ham,sausages), newspaper, home chemistry etc. 
 
 - The nearest competition is a small grocery store and sells the same products as this SuperMarket. The area of the shop is 120m^2 and was opened in 2009. 
 
@@ -90,13 +87,13 @@ The final decision of the system is based on the best algorithms of  the day by 
 
 ## TECHNOLOGIES USED 
 
-- To implement the regression models and select the best performing one, we have used pycaret library in python
+- To implement the regression models and select the best performing one, we have used **pycaret** library in **python**
 
-- We used the wwo-hist API to procure weather data for our dataset dates.
+- We used the **wwo-hist API** to procure weather data for our dataset dates.
 
-- Pickle was used to save the model and Flask and REST API to create an interface for the model.
+- **Pickle** was used to save the model and **Flask and REST API** to create an interface for the model.
 
-- Finally the web application was deployed on the server using Heroku CLI.
+- Finally the web application was deployed on the server using **Heroku CLI.**
 
 
 
