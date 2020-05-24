@@ -210,8 +210,8 @@ Click here to view DEMO VIDEO : https://youtu.be/Yu01uDnsUFY
 
 #### Click Here to test it live! : 
 
-https://pgstockprediction.herokuapp.com
+[Here!](https://pgstockprediction.herokuapp.com)
 
 
-https://docs.google.com/presentation/d/1E6kn-N0C6Wd8OOtVYtF-8lNsVlb-jBVzabOo2EBCt64/edit?usp=sharing
+[Doc link](https://docs.google.com/presentation/d/1E6kn-N0C6Wd8OOtVYtF-8lNsVlb-jBVzabOo2EBCt64/edit?usp=sharing)
 
