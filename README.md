@@ -131,7 +131,8 @@ We merge the obtained csv date wise to our dataset and again visualise the data 
 
 We train several regression models. 
  
-They include svm...
+They include Random Forest, Extreme Gradient boosting, CatBoost Regressor, Ridge Regression, Bayesian Ridge, Linear Regression, Rnadom Sample consensus, Orthogonal Matching Pursuit, Lasso Regression, Extra trees Regessor, Elastic Net, K neighbors Regressor, Support vector machine, Decision Tree, AdaBoost Regressor, Lasso Least Angle Regression, Gradient Boostinf regressor etc.
+
 
 
 ## REAL WORLD SCENARIO
