@@ -73,7 +73,7 @@ The Dataset we have is **data of sale of various FMCG goods of a SuperMarket** l
 
 - The nearest competition is a small grocery store and sells the same products as this SuperMarket. The area of the shop is 120m^2 and was opened in 2009. 
 
-- The Data deals with products sold  in a time period of 12 days over various weather conditions for each particular day. It has 13000 entries ranging over various product descriptions like price, product number, quantity sold etc.
+- The Data deals with products sold  in a time period of 30 days over various weather conditions for each particular day. It has 13000 entries ranging over various product descriptions like price, product number, quantity sold etc.
 
 - We predict the number of products sold for each category everyday based on this data. The inputs taken by the model would be the weather and the probable quantity sold each day would be the final output. This would lead to better predicting of stock and easy ordering of the necessary goods. 
 
